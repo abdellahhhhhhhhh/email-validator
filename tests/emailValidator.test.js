@@ -8,3 +8,15 @@ describe("emailValidator - '@' presence", () => {
     expect(typeof emailValidator('user@example')).toBe('boolean');
   });
 });
+
+describe('emailValidator - domain dot rule', () => {
+  test('fails when domain has no dot', () => {
+    expect(emailValidator('user@example')).toBe(false);
+  });
+  test('fails when dot is last char of domain', () => {
+    expect(emailValidator('user@example.')).toBe(false);
+  });
+  test('passes when domain has a dot not at the end', () => {
+    expect(emailValidator('user@example.com')).toBe(true);
+  });
+});
