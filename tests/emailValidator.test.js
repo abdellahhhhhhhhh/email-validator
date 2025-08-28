@@ -31,3 +31,26 @@ describe('emailValidator - no spaces', () => {
     expect(emailValidator('user@example.com')).toBe(true);
   });
 });
+
+describe("emailValidator - text before and after '@'", () => {
+test('fails when empty local part', () => {
+expect(emailValidator('@example.com')).toBe(false);
+});
+
+
+test('fails when empty domain part', () => {
+expect(emailValidator('user@')).toBe(false);
+});
+
+
+test('fails when multiple @ lead to invalid shape', () => {
+expect(emailValidator('user@@example.com')).toBe(false);
+expect(emailValidator('user@exa@mple.com')).toBe(false);
+});
+
+
+test('passes when both sides have text', () => {
+expect(emailValidator('u@e.com')).toBe(true);
+expect(emailValidator('john.doe@mail.co')).toBe(true);
+});
+});
