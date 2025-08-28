@@ -20,3 +20,14 @@ describe('emailValidator - domain dot rule', () => {
     expect(emailValidator('user@example.com')).toBe(true);
   });
 });
+
+describe('emailValidator - no spaces', () => {
+  test('fails when email contains spaces', () => {
+    expect(emailValidator('user name@example.com')).toBe(false);
+    expect(emailValidator(' user@example.com')).toBe(false);
+    expect(emailValidator('user@example.com ')).toBe(false);
+  });
+  test('still passes a clean email', () => {
+    expect(emailValidator('user@example.com')).toBe(true);
+  });
+});
